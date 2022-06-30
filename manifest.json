@@ -1,0 +1,15 @@
+{
+  "short_name": "My App",
+  "name": "Extension App",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs"
+   ],
+   
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+  
+}
