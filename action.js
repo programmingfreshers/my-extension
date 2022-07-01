@@ -16,7 +16,7 @@ function getTodayDate(){
    let time = h + ":" + m + ":" + s;
    return time;
 }
-function getDate(){
+function getCurrentDate(){
      var today = new Date();
      var date = today.getDate() +'-'+(today.getMonth()+1)+'-'+today.getFullYear() + ' | ' + getTodayDate();
      return date.toString();
@@ -42,14 +42,14 @@ function deleteTaskInDatabase(taskID) {
           })
 }
 
-function addTask(txt) {
+function addTask(txt,text) {
      const node = document.createElement("button");
                node.className = 'option';
                node.id = 'option' 
-               var modified_text = getDate().toUpperCase()  + ' : '+txt;    
+               var modified_text = text.toUpperCase()  + ' : '+txt;    
+               node.setAttribute("value",text);
                const textnode = document.createTextNode(modified_text);
                node.appendChild(textnode); 
-               node.setAttribute("value",getDate());
                document.getElementById("root").appendChild(node);
                document.getElementById('input').value = '';
                node.addEventListener('click',()=>{
@@ -62,10 +62,9 @@ function addTask(txt) {
           
 }
 
-function addTaskInDatabase(txt) {
-     var getdate = getDate();
+function addTaskInDatabase(txt,taskID) {
      user = {
-          "taskID": getdate,
+          "taskID": taskID,
           "task": txt
       }
       // Options to be given as parameter
@@ -101,7 +100,8 @@ function fetchTasks() {
      .then(d => {
           d.forEach(element => {
                var txt = element['task'];
-               addTask(txt);
+               var text = element['taskID']
+               addTask(txt,text);
           });
      });
      
@@ -126,7 +126,8 @@ fetchTasks();
 document.getElementById('btn').addEventListener('click',()=>{
 
      var txt = document.getElementById('input').value;
-     addTask(txt);
-     addTaskInDatabase(txt);
+     var text = getCurrentDate();
+     addTask(txt,text);
+     addTaskInDatabase(txt,text);
      inputFocus();
 });

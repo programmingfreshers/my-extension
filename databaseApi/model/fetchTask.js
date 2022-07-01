@@ -11,7 +11,8 @@ router.get('/fetchtask',(req,res)=>{
           tasks.forEach((elem)=>{
                console.log(elem);
                ls.push({
-                    'task': elem['task']
+                    'task': elem['task'],
+                    'taskID' : elem['taskID'],
                })
           })
           res.json(ls)
