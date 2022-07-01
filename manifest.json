@@ -5,7 +5,8 @@
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "<all_urls>"
    ],
    
   "browser_action": {
